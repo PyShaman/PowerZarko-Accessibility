@@ -22,8 +22,7 @@ Install [PIP](https://pypi.org/project/pip/).
 
 _2. Installing required packages and tools_
 
-After cloning [PowerZarko Accessibility](https://github.com/PyShaman/emakina-demo.git) repository locally user should enter 
-emakina-demo folder and create separate virtual environment for this project by using following command:
+After cloning [PowerZarko Accessibility](https://github.com/PyShaman/PowerZarko-Accessibility) repository locally user should enter folder and create separate virtual environment for this project by using following command:
 ```
 $ python -m venv venv
 ```
@@ -38,7 +37,7 @@ $ ./venv/Scripts/activate
 for Linux.
 When virtual environment will be activated the user will see additional mark at console:
 ```
-(venv) path\emakina-demo >
+(venv) path\PowerZarko-Accessibility >
 ```
 Next step is to install required packages using following command:
 ```
@@ -46,19 +45,25 @@ $ pip3 install -r requirements.txt
 ```
 
 This will automatically download and install all necessary packages.
+Next very important step is to manually update axe-python-selenium package with newest accessibility script. To do so,
+check the version of current axe.min.js file in main directory (axe v3.5.3). Then visit [this](https://github.com/dequelabs/axe-core-maven-html/blob/develop/src/test/resources/axe.min.js)
+ site and check current version. If it differs, download newer one. Next step is to copy axe.min.js to following directory:
+```
+\venv\Lib\site-packages\axe_selenium_python\node_modules\axe-core\
+```
+At the end fill the list of url to scan in sites.py file.
+
+After this operation you are ready to go and you can scan websites against accessibility :)
 
 _3. Usage:_
 
 To run all tests use following command:
 ```
-$ python runner.py
+$ python test_01_accessibility_wcag2a.py
 ```
 
 _4. Output:_
 
 The tests will perform WCAG 2A, WCAG 2AA, full accessibility scan and finally vulnerability scan of the websites.
-Results of accessibility will be kept in results folder. After scanning the tests will zip a11y output files and post a ticket
-to JIRA instance with zip files as attachments. Vulnerability scan will create scan report in html form and will be attached 
-to newly created JIRA ticket automatically.
+Results of accessibility will be kept in results folder.
 
-https://github.com/dequelabs/axe-core-maven-html/blob/develop/src/test/resources/axe.min.js

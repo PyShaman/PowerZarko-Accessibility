@@ -27,7 +27,7 @@ class TestAccessibilityWCAGOnly(unittest.TestCase):
     @staticmethod
     def test_01_prepare_directory():
         """
-        This test creates bunch of directories to store data from scan
+        This test creates bunch of directories to store data from accessibility scan
         :return:
         """
         try:
@@ -43,6 +43,9 @@ class TestAccessibilityWCAGOnly(unittest.TestCase):
     def test_02_test_wcag2a():
         ae = AxeEngine()
         for site in SITES:
+            # this one is tricky. it gets url address from sites.py file from SITES list and trim first 23 characters
+            # for this demo I picked https://www.guru99.com/ site and its subsites, so [23:] trims https://www.guru99.com/
+            # and .replace(".html", "") replaces .html to empty string, so you will have for example site_name = 'selenium-tutorial'
             site_name = site[23:].replace(".html", "")
             driver.get(site)
             ae.inject_wcag2a(driver, timestamp, f"{site_name}.txt", site)
